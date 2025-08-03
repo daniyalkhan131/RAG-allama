@@ -1,0 +1,1 @@
+# RAG for video playlist, where we can question and based on video will get answere

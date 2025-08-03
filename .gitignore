@@ -1,0 +1,10 @@
+data
+IndicTransToolkit
+NeMo
+notebook
+prompt
+script
+utils
+
+.env
+config.yaml

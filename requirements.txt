@@ -1,0 +1,4 @@
+google-genai
+langchain-google-genai
+langchain-qdrant
+qdrant-client 
