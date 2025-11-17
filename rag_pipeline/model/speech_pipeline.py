@@ -18,7 +18,7 @@ class SpeechPipeline:
             self,
             vad_repo_or_dir='snakers4/silero-vad', 
             vad_model_name='silero_vad', 
-            asr_model_name: str = "ai4bharat/indicconformer_stt_hi_hybrid_rnnt_large"):
+            asr_model_name: str = "ai4bharat/indicconformer_stt_hi_hybrid_ctc_rnnt_large"):
         """
         Initializes the pipeline by creating instances of the VAD and Transcription services.
         """
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     speech_pipeline= SpeechPipeline(
         vad_repo_or_dir='snakers4/silero-vad', 
         vad_model_name='silero_vad', 
-        asr_model_name= "ai4bharat/indicconformer_stt_hi_hybrid_rnnt_large"
+        asr_model_name= "ai4bharat/indicconformer_stt_hi_hybrid_ctc_rnnt_large"
     )
     transcribed_vad_segments= speech_pipeline.process_audio_file(
         filepath= file_path,

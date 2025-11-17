@@ -127,7 +127,8 @@ from typing import Dict, Any, List
 
 
 # JSON file to store processing records
-PROCESSING_LOG_FILE = "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/youtube_processing_log.json"
+# PROCESSING_LOG_FILE = "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/youtube_processing_log.json"
+PROCESSING_LOG_FILE= "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_2.json"
 
 
 def generate_url_id(url: str) -> str:
@@ -379,7 +380,7 @@ def print_processing_summary():
 
 
 if __name__ == '__main__':
-    playlist_url = "https://youtube.com/playlist?list=PLTPwffe8uEJvzs16CXOT0yLjkYyZraGLN&si=07m0hDNs-49FhjOF"
+    playlist_url = "https://youtube.com/playlist?list=PLTPwffe8uEJvnUwiT1szDcdrL-DLZzdfn&si=hU92HmywhZxrMsmq"
     dir = "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data"
     
     

@@ -1,7 +1,7 @@
 from ingestion.download import download_and_postprocess_playlist, print_processing_summary
 
 
-playlist_url = "https://youtube.com/playlist?list=PLTPwffe8uEJsyGgifsOPQHyyZLPD9Tde9&si=ykgu3Jri59Nq4mNT"
+playlist_url = "https://youtube.com/playlist?list=PLTPwffe8uEJsOdv9kvXuTV3ZnKZ-DNiB_&si=2S2jzA1LzVcykHVo"
 dir = "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data"
 
 

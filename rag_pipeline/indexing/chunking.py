@@ -3,12 +3,13 @@ from typing import List, Dict, Tuple
 from langchain_core.documents import Document
 
 class VADVTimeGapChunker(TextSplitter):
-    def __init__(self, file_name, gap_threshold: float = 0.85, max_tokens: int = 300, **kwargs):
+    def __init__(self, file_name, url, gap_threshold: float = 0.85, max_tokens: int = 300, **kwargs):
         super().__init__(**kwargs)
         self.gap_threshold = gap_threshold
         self.max_tokens = max_tokens
         # self.encoding = tiktoken.get_encoding(encoding_name)
         self.file_name= file_name
+        self.url= url
 
     # def count_tokens(self, text: str) -> int:
     #     return len(self.encoding.encode(text))
@@ -38,7 +39,8 @@ class VADVTimeGapChunker(TextSplitter):
                         metadata={"start": paragraph_start,
                                   "end": vad_segments[i - 1]["end"],
                                   "token_count": current_tokens + tokens,
-                                  "file_name": self.file_name.split('.')[0]}
+                                  "file_name": self.file_name.split('.')[0],
+                                  "url": self.url}
                     ))
                     # start new paragraph
                     current_paragraph = [text]
@@ -55,7 +57,8 @@ class VADVTimeGapChunker(TextSplitter):
                 metadata={"start": paragraph_start,
                           "end": vad_segments[-1]["end"],
                           "token_count": current_tokens + tokens,
-                          "file_name": self.file_name.split('.')[0]}
+                          "file_name": self.file_name.split('.')[0],
+                          "url": self.url}
             ))
 
         return paragraphs

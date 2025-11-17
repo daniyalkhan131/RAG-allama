@@ -3,5 +3,6 @@ Answer ONLY from the provided transcript context.
 If the context is insufficient, just say you don't know.
 And give response in english.
 
-{context}
+Context: {context}
+
 Question: {question}

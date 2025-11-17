@@ -10,8 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv('/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/.env')
 
-
-with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/youtube_processing_log.json", 'r') as f:
+with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_2.json", 'r') as f:
     downloaded_audio_data= json.load(f)
 
 
@@ -33,8 +32,12 @@ vector_store = QdrantVectorStore(
 
 # meta_data= {}
 for i in downloaded_audio_data:
+    if 'speech_pipeline_status' in downloaded_audio_data[i] and downloaded_audio_data[i]['speech_pipeline_status']== 'completed':
+        print(f"Skipping {downloaded_audio_data[i]['filename']} as it is already processed.")
+        continue
     file_output_path= downloaded_audio_data[i]['final_output_path']
     if file_output_path and downloaded_audio_data[i]['status']== 'completed':
+        print(f"Processing {downloaded_audio_data[i]['filename']}...")
         transcribed_vad_segments= speech_pipeline.process_audio_file(
             filepath= file_output_path,
             decoder= "ctc",
@@ -49,12 +52,13 @@ for i in downloaded_audio_data:
             
         # meta_data[i]= downloaded_audio_data[i]
         downloaded_audio_data[i]['speech_pipeline_status']= 'completed'
-        downloaded_audio_data[i]['speech_pipeline_output']= transcribed_vad_segments
+        # downloaded_audio_data[i]['speech_pipeline_output']= transcribed_vad_segments
         downloaded_audio_data[i]['speech_pipeline_output_path']= output_file
 
 
-        splitter= VADVTimeGapChunker(file_name= downloaded_audio_data[i]['filename'], gap_threshold= 0.85, max_tokens= 500)
-        chunks = splitter.split_documents(downloaded_audio_data[i]['speech_pipeline_output'])
+        print("chunking and embedding...")
+        splitter= VADVTimeGapChunker(file_name= downloaded_audio_data[i]['filename'], url= downloaded_audio_data[i]['url'], gap_threshold= 0.85, max_tokens= 500)
+        chunks = splitter.split_documents(transcribed_vad_segments)
         downloaded_audio_data[i]['chunking_status']= 'completed'
         
         process_embedding_batches(chunks, vector_store.add_documents)
@@ -62,7 +66,7 @@ for i in downloaded_audio_data:
         downloaded_audio_data[i]['embedding_status']= 'completed'
         downloaded_audio_data[i]['num_chunks']= len(chunks)
         print(f"Completed processing for {downloaded_audio_data[i]['filename']} with {len(chunks)} chunks.")
-        print(f"tokens: {[i['token_count'] for i in chunks]}")
+        print(f"tokens: {[i.metadata['token_count'] for i in chunks]}")
 
-with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/files_processed_metadata.json", 'w') as f:
-    json.dump(downloaded_audio_data, f, ensure_ascii= False, indent= 4)
+        with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_2.json", 'w') as f:
+            json.dump(downloaded_audio_data, f, ensure_ascii= False, indent= 4)

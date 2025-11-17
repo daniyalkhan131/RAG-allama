@@ -6,7 +6,7 @@ import tiktoken
 SAMPLE_RATE = 16000
 
 class TranscriptionService:
-    def __init__(self, model_name: str = "ai4bharat/indicconformer_stt_hi_hybrid_rnnt_large"):
+    def __init__(self, model_name: str = "ai4bharat/indicconformer_stt_hi_hybrid_ctc_rnnt_large"):
         print(f"Initializing TranscriptionService with model: {model_name}...")
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Using device: {self.device}")
