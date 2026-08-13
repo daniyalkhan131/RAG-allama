@@ -128,7 +128,7 @@ from typing import Dict, Any, List
 
 # JSON file to store processing records
 # PROCESSING_LOG_FILE = "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/youtube_processing_log.json"
-PROCESSING_LOG_FILE= "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_2.json"
+PROCESSING_LOG_FILE= "/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_3.json"
 
 
 def generate_url_id(url: str) -> str:

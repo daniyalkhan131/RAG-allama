@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv('/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/.env')
 
-with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_2.json", 'r') as f:
+with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_3.json", 'r') as f:
     downloaded_audio_data= json.load(f)
 
 
@@ -68,5 +68,5 @@ for i in downloaded_audio_data:
         print(f"Completed processing for {downloaded_audio_data[i]['filename']} with {len(chunks)} chunks.")
         print(f"tokens: {[i.metadata['token_count'] for i in chunks]}")
 
-        with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_2.json", 'w') as f:
+        with open("/Users/daniyalkhan/Documents/WORK-for-Compassion/projects/RAG-allama_audio/data/meta_data/processed_files_logs_3.json", 'w') as f:
             json.dump(downloaded_audio_data, f, ensure_ascii= False, indent= 4)
